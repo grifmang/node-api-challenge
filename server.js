@@ -4,10 +4,11 @@ const server = express();
 const helmet = require('helmet');
 
 const projectRouter = require('./projects/projectRouter');
-// const actionRouter = require('./action/actionRouter');
+const actionRouter = require('./action/actionRouter');
 
 server.use(express.json());
 server.use(cors());
+server.use(helmet());
 server.use(logger);
 
 server.get('/', (req, res) => {
@@ -15,7 +16,7 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/projects', projectRouter);
-// server.use('/api/actions', actionRouter);
+server.use('/api/actions', actionRouter);
 
 
 function logger(req, res, next) {
